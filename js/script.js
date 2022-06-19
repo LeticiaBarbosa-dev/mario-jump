@@ -1,6 +1,5 @@
 const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
-const sound = document.querySelector('.sound');
 
 const jump = () => {
     mario.classList.add('jump');
@@ -14,7 +13,6 @@ const jump = () => {
     const loop = setInterval(() => {
         const pipePosition = pipe.offsetLeft;
         const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
-        let gameOver = 0;
 
 
         if(pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
@@ -29,7 +27,6 @@ const jump = () => {
             
             clearInterval(loop);
 
-            sound.remove();
             document.body.innerHTML = `
                 <audio autoplay src="./sounds/SUPER-MARIO-game-over-sound-effect.mp3" class="sound-game-over"></audio>
                 <div class="game-over">
