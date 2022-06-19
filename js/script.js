@@ -14,8 +14,8 @@ const jump = () => {
     const loop = setInterval(() => {
         const pipePosition = pipe.offsetLeft;
         const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
+        let gameOver = 0;
 
-        // console.log(marioPosition);
 
         if(pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
             pipe.style.animation = 'none';
@@ -24,15 +24,21 @@ const jump = () => {
             mario.style.animation = 'none';
             mario.style.bottom = `${marioPosition}px`;
 
-            mario.src = './images/game-over.png';
             mario.style.width = '75px';
             mario.style.marginLeft = '50px';
-
-            sound.src = './sounds/SUPER-MARIO-game-over-sound-effect.mp3';
-            sound.removeAttribute('loop');
-
+            
             clearInterval(loop);
+
+            sound.remove();
+            document.body.innerHTML = `
+                <audio autoplay src="./sounds/SUPER-MARIO-game-over-sound-effect.mp3" class="sound-game-over"></audio>
+                <div class="game-over">
+                    <h1>Game Over</h1>
+                </div>
+            `;
         }
+
+        
 
     }, 10);
 }
